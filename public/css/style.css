@@ -1,0 +1,16 @@
+*{
+	margin:0;
+	padding:0;
+}
+.jumbotron{
+	background-color: #999999;
+	color:white;
+	height: 4em;
+}
+ .container-form{
+ 	width:600px;
+ 	background-color: #F1F1F1;
+ 	min-height: 6em;
+ 	padding: 20px;
+ 	margin:auto;
+ }
