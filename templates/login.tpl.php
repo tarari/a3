@@ -3,12 +3,16 @@
 	$db=connectDB($dsn,$user,$pass);
 
 	if (isset($_POST['submit'])){
+
 		if(!empty($_POST['email']) && !empty($_POST['passw'])){
+
 			$email=$_POST['email'];
 			$passw=$_POST['passw'];
 			$sql="SELECT * FROM user WHERE email=?";
 			$stmt=$db->prepare($sql);
+			$stmt->execute([$email]);
 			$user=$stmt->fetch();
+			
 			// si coincide password
 			if($user && password_verify($passw,$user['passwd'])){
 				$_SESSION['logged']=true;

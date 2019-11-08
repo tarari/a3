@@ -1,7 +1,7 @@
 <?php
 
 	include 'header.tpl.php';
-
+	define('ROOT',$_SERVER['REQUEST_URI']);
 	
 	$db=connectDB($dsn,$user,$pass);
 
@@ -21,7 +21,7 @@
 				}catch(Exception $e){
 					$_SESSION['errors'][]=$e->getMessage();
 				}
-				header('Location:/');
+				header('Location:'.ROOT.'index.php');
 			}
 			
 		}

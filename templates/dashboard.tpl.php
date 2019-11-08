@@ -3,8 +3,8 @@
 	?>
 
 	<div class="container">
-		<h1>Personal dashboard</h1>
+		<h1>Personal dashboard : <?= $_SESSION['email']; ?></h1>
 	</div>
-	<?php include 'footer.tpl.php';
+	<?php include 'footer.tpl.php'; ?>
 </body>
 </html>
