@@ -1,6 +1,32 @@
 <?php
 
 	include 'header.tpl.php';
+
+	
+	$db=connectDB($dsn,$user,$pass);
+
+	if (isset($_POST['submit'])){
+		if (!empty($_POST['email'])&& 
+			!empty($_POST['passw1']) && 
+			!empty($_POST['passw2']))
+		{
+			$email=$_POST['email'];
+			$passw1=$_POST['passw1'];
+			$passw2=$_POST['passw2'];
+			if($passw1==$passw2){
+				$pass=password_hash($passw1, PASSWORD_BCRYPT,['cost'=>4]);
+				$params=[$email,$pass];
+				try{
+					query($db,'INSERT  INTO user(email,passwd) VALUES(?,?)',$params);
+				}catch(Exception $e){
+					$_SESSION['errors'][]=$e->getMessage();
+				}
+				header('Location:/');
+			}
+			
+		}
+
+	}
 	?>
 	<div class="container-form">
 		<h3 class="align-items-center">Sign up</h3>

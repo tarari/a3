@@ -1,5 +1,22 @@
 <?php
 	include 'header.tpl.php';
+	$db=connectDB($dsn,$user,$pass);
+
+	if (isset($_POST['submit'])){
+		if(!empty($_POST['email']) && !empty($_POST['passw'])){
+			$email=$_POST['email'];
+			$passw=$_POST['passw'];
+			$sql="SELECT * FROM user WHERE email=?";
+			$stmt=$db->prepare($sql);
+			$user=$stmt->fetch();
+			// si coincide password
+			if($user && password_verify($passw,$user['passwd'])){
+				$_SESSION['logged']=true;
+				$_SESSION['email']=$email;
+				header('Location:dashboard.php');
+			}
+		}
+	}
 ?>
 	<div class="container-form">
 		<h3 class="align-items-center">Sign in</h3>

@@ -11,23 +11,24 @@
 				echo $e->getMessage();
 				$db=null;
 			}
-		
 		return $db;
 	}
 	//query($d,'SELECT  * FROM user WHERE email=:email AND pass=:pass',[':email'=>$email,':pass'=>$pass])
 	function query($db,$sql,$params){
-		$stmt=$db->prepare($sql,$params);
+		$stmt=$db->prepare($sql);
 		if($params){
-			foreach ($params as $clau => $valor) {
-				$stmt->bindParam($clau,$valor);
-			}
+			$res=$stmt->execute($params);
+		}else{
+			$res=$stmt->execute();
 		}
-		$res=$stmt->execute();
 		return $stmt;	
 	}
-
+	/**
+	*  returns array results
+	* 	$stmt object
+	*/
 	function row_extract($stmt){
 		//after query please
 		$rows=$stm->fetchAll();
-		return $stmt;
+		return $rows;
 	}
